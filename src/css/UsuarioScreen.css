@@ -1,0 +1,9 @@
+.usuarioScreen {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.usuarioScreen h1 {
+    margin: auto;
+}

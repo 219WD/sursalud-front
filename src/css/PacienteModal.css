@@ -1,0 +1,108 @@
+/* Estilo general del modal */
+.ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+}
+  
+.ReactModal__Content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    color: #333;
+}
+  
+/* Título del modal */
+.modal-titulo {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #007bff;
+}
+  
+/* Estilo del formulario */
+.paciente-formulario {
+    display: flex;
+    flex-direction: column;
+}
+  
+/* Etiquetas y campos de entrada */
+.paciente-formulario label {
+    font-weight: 500;
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+    color: #333;
+    display: block;
+}
+  
+.paciente-formulario input[type="text"],
+.paciente-formulario input[type="date"],
+.paciente-formulario input[type="number"],
+.paciente-formulario select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px; /* Espacio entre el input y la siguiente etiqueta */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    color: #333;
+}
+  
+/* Estilo para los radios */
+.paciente-formulario input[type="radio"] {
+    margin-left: 10px;
+    margin-right: 5px;
+}
+  
+/* Alineación de los radios a la derecha */
+.paciente-formulario .radio-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+  
+/* Botones personalizados */
+.paciente-btn-principal {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+  
+.paciente-btn-principal:hover {
+    background-color: #0056b3;
+}
+  
+.paciente-btn-secundario {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #ccc;
+    color: black;
+    transition: background-color 0.3s ease;
+}
+  
+.paciente-btn-secundario:hover {
+    background-color: #aaa;
+}
+  
+/* Alineación de los botones */
+.paciente-formulario .paciente-boton-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+

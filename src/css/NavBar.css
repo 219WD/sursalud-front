@@ -1,0 +1,28 @@
+.navBar {
+    width: 100%;
+    max-width: 99vw;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem; 
+    background: transparent;
+}
+
+.logo img{
+    width: 2.5rem;
+}
+
+.loginBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    color: #fff;
+    background: #8125d7;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer; 
+}

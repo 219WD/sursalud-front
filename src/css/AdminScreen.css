@@ -1,0 +1,9 @@
+.adminScreen {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.adminScreen h1 {
+    margin: auto;
+}

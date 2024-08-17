@@ -1,0 +1,9 @@
+.moderadorScreen {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.moderadorScreen h1 {
+    margin: auto;
+}
