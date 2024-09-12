@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
@@ -9,6 +10,10 @@ import UserRouter from "./Routes/UserRouter";
 import AdminRouter from "./Routes/AdminRouter";
 import ModeratorRouter from "./Routes/ModeratorRouter";
 import AccessDenied from './pages/AccessDenied';
+import { Toaster } from 'react-hot-toast';
+import Preloading from './components/Preloading';
+
+const FooterLazy = lazy(() => import('./components/Footer'))
 
 const App = () => {
   const [jwt, setJwt] = useState(localStorage.getItem('token') || "");
@@ -61,7 +66,8 @@ const App = () => {
 
   return (
     <Router>
-      <NavBar authenticated={!!jwt} isAdmin={isAdmin} changeJwt={changeJwt}  />
+      <Toaster position="top-right" reverseOrder={false} />
+      <NavBar authenticated={!!jwt} isAdmin={isAdmin} changeJwt={changeJwt} />
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/login" element={<Login changeJwt={changeJwt} />} />
@@ -74,14 +80,18 @@ const App = () => {
         />
         <Route
           path="/admin/*"
-          element={<AdminRouter show={role === 'admin'}  jwt={jwt} />}
+          element={<AdminRouter show={role === 'admin'} jwt={jwt} />}
         />
         <Route
           path="/moderator/*"
           element={<ModeratorRouter show={role === 'moderator'} />}
         />
       </Routes>
-
+      <Suspense fallback={
+        <div><Preloading /></div>
+      }>
+        <FooterLazy />
+      </Suspense>
     </Router>
   );
 };

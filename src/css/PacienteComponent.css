@@ -1,0 +1,74 @@
+/* Estilo general del modal */
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.75); /* Fondo semitransparente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    color: #333;
+    max-height: 80vh; /* Asegúrate de que el modal no se extienda más allá del 80% del viewport height */
+    overflow-y: auto; /* Agrega un scroll si el contenido sobrepasa el max-height */
+}
+
+/* Botón de cierre */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Estilo de la información del paciente */
+.paciente-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Sección de información individual */
+.info-section {
+    margin-bottom: 20px;
+}
+
+.info-section h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #007bff;
+}
+
+.info-section p {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.info-section p strong {
+    font-weight: 600;
+}
+
+/* Estilo para los antecedentes */
+.info-section div {
+    margin-bottom: 10px;
+}

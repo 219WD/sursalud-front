@@ -1,0 +1,19 @@
+/* ToastIcons.css */
+.toast-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.success-icon .icon-path {
+  fill: #4caf50; /* Color para el icono de éxito */
+      box-shadow: 7px 7px 15px rgba(163, 177, 198, 0.5),
+        -7px -7px 20px rgba(255, 255, 255, 0.7),
+        inset 0px 0px 4px rgba(255, 255, 255, 0.2);
+}
+
+.error-icon .icon-path {
+  fill: #f44336; /* Color para el icono de error */
+      box-shadow: 7px 7px 15px rgba(163, 177, 198, 0.5),
+        -7px -7px 20px rgba(255, 255, 255, 0.7),
+        inset 0px 0px 4px rgba(255, 255, 255, 0.2);
+}

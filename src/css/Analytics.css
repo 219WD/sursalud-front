@@ -1,0 +1,64 @@
+.analyticsScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+    background:
+        linear-gradient(rgba(244, 235, 220, 0.7), rgba(244, 235, 220, 0.7)),
+        url('https://res.cloudinary.com/dtxdv136u/image/upload/v1725887666/5591317_t9r4dv.jpg'); /* Asegúrate de que esta ruta sea correcta */
+    background-size: cover;
+    background-blend-mode: multiply;
+    padding: 2rem;
+}
+
+.displayAnalytic{
+    width: 80vw;
+    background: rgba(116, 116, 116, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 7px 7px 15px rgba(163, 177, 198, 0.5),
+        -7px -7px 20px rgba(255, 255, 255, 0.7),
+        inset 0px 0px 4px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.analyticsScreen h1 {
+    color: #AF5286;
+    font-size: 3rem;
+}
+
+.charts-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    gap: 1rem;
+}
+
+.chart-container {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 3rem 1rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    height: 400px; /* Asegura que ambos gráficos tengan la misma altura */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-container h2 {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: #333;
+}

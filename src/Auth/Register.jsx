@@ -40,6 +40,10 @@ const Register = () => {
       .catch(error => console.error('Error:', error));
   };
 
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
   return (
     <div className="registerContainer">
       <div className="register">
@@ -62,6 +66,7 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit">Registro</button>
+          <p>Ya tienes una cuenta? <button className='btnLink' type="button" onClick={handleLoginClick}>Iniciar Sesion</button></p>
         </form>
       </div>
     </div>

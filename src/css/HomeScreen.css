@@ -1,9 +1,112 @@
 .homeScreen {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     width: 100vw;
     height: 100vh;
+    background:
+        linear-gradient(rgba(165, 214, 237, 0.7), rgba(244, 235, 220, 0.7)),
+        url('https://res.cloudinary.com/dtxdv136u/image/upload/v1725992188/portrait-nurse-holding-clipboard_ohhlef.jpg');
+    background-size: cover;
+    background-blend-mode: multiply;
+    padding: 2rem;
 }
 
-.homeScreen h1 {
+.homeScreen .display {
+    background: rgba(116, 116, 116, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 7px 7px 15px rgba(163, 177, 198, 0.5),
+        -7px -7px 20px rgba(255, 255, 255, 0.7),
+        inset 0px 0px 4px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: auto;
 }
+
+.cardStats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+}
+
+.statCard {
+    width: 15rem;
+    height: 12rem;
+    background: rgba(235, 235, 235 , 0.3);
+    backdrop-filter: blur(20px);
+    padding: 1rem;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 7px 7px 15px rgba(163, 177, 198, 0.5),
+        -7px -7px 20px rgba(180, 180, 180, 0.7),
+        inset 0px 0px 4px rgba(255, 255, 255, 0.2);
+    color: #AF5286;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.statCard h3 {
+    font-size: 2rem;
+}
+
+.statCard h2 {
+    font-size: 1.4rem;
+}
+
+.botonera {
+    background: rgba(235, 235, 235 , 0.3);
+    padding: 1rem;
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 7px 7px 15px rgba(163, 177, 198, 0.5),
+        -7px -7px 20px rgba(180, 180, 180, 0.7),
+        inset 0px 0px 4px rgba(255, 255, 255, 0.2);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.botonera button {
+    background-color: #AF5286;
+    color: rgb(255, 255, 255);
+    padding: 1rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.botonera button:hover {
+    background-color: #913f6d;
+}
+
+.chart-container {
+    margin-top: 40px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .chart-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  

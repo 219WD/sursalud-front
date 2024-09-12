@@ -1,8 +1,16 @@
+import { lazy, Suspense } from 'react'
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AdminScreen from '../Admin/AdminScreen';
 import PropTypes from 'prop-types';
-import PacienteList from '../components/PacienteList';
+import Preloading from '../components/Preloading';
+
+const AdminScreenLazy = lazy(() => import('../Admin/AdminScreen'))
+const PacientesLazy = lazy(() => import('../components/PacienteList'))
+const EspecialistasLazy = lazy(() => import('../components/MedicosList'))
+const TurnosLazy = lazy(() => import('../components/TurnoTable'))
+const AnalyticsLazy = lazy(() => import('../components/Analytics'))
+const SalaDeEsperaLazy = lazy(() => import('../components/SalaDeEspera'))
+
 
 function AdminRouter({ show, jwt }) {
   if (!show) {
@@ -11,8 +19,48 @@ function AdminRouter({ show, jwt }) {
 
   return (
     <Routes>
-      <Route path="/" element={<AdminScreen jwt={jwt} />} />
-      <Route path='/pacientes' element={<PacienteList jwt={jwt} />} />
+      <Route path='/' element={
+        <Suspense fallback={
+          <div><Preloading /></div>
+        }>
+          <AdminScreenLazy jwt={jwt} />
+        </Suspense>
+      } />
+      <Route path='/pacientes' element={
+        <Suspense fallback={
+          <div><Preloading /></div>
+        }>
+          <PacientesLazy jwt={jwt} />
+        </Suspense>
+      } />
+      <Route path='/especialistas' element={
+        <Suspense fallback={
+          <div><Preloading /></div>
+        }>
+          <EspecialistasLazy jwt={jwt} />
+        </Suspense>
+      } />
+      <Route path='/turnos' element={
+        <Suspense fallback={
+          <div><Preloading /></div>
+        }>
+          <TurnosLazy jwt={jwt} />
+        </Suspense>
+      } />
+      <Route path='/analytics' element={
+        <Suspense fallback={
+          <div><Preloading /></div>
+        }>
+          <AnalyticsLazy jwt={jwt} />
+        </Suspense>
+      } />
+      <Route path='/salaDeEpera' element={
+        <Suspense fallback={
+          <div><Preloading /></div>
+        }>
+          <SalaDeEsperaLazy jwt={jwt} />
+        </Suspense>
+      } />
     </Routes>
   );
 }

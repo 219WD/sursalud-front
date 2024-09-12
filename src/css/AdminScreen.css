@@ -1,9 +1,65 @@
-.adminScreen {
+/* AdminScreen Styles */
+.adminScreenContainer {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     width: 100vw;
     height: 100vh;
+    background:
+        linear-gradient(rgba(244, 235, 220, 0.7), rgba(244, 235, 220, 0.7)),
+        url('https://res.cloudinary.com/dtxdv136u/image/upload/v1725887666/5591317_t9r4dv.jpg'); /* Asegúrate de que esta ruta sea correcta */
+    background-size: cover;
+    background-blend-mode: multiply;
+    padding: 2rem;
 }
 
-.adminScreen h1 {
+.display p {
+    width: 40vw;
+    color: #000;
+}
+
+.btns-container-delete {
+    display: flex;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.tablaRenderizable {
+    width: 80vw;
+    max-height: 60vh;
+    overflow-y: auto; /* Mantiene el scroll vertical para no cortar contenido */
+    background: rgba(116, 116, 116, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 7px 7px 15px rgba(163, 177, 198, 0.5),
+        -7px -7px 20px rgba(255, 255, 255, 0.7),
+        inset 0px 0px 4px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Cambiado de 'center' a 'flex-start' */
     margin: auto;
+    margin-top: 1rem;
+}
+
+/* Estilo del scrollbar */
+.tablaRenderizable::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 8px;
+}
+
+.tablaRenderizable::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.tablaRenderizable::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.tablaRenderizable::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

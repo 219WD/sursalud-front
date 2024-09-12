@@ -1,0 +1,161 @@
+.salaDeEsperaContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+    background:
+        linear-gradient(rgba(165, 214, 237, 0.7), rgba(244, 235, 220, 0.7)),
+        url('https://res.cloudinary.com/dtxdv136u/image/upload/v1725992189/pexels-cristian-rojas-8459996_c8dihc.jpg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    padding: 3.5rem 1rem;
+    gap: 1rem;
+}
+
+.toasts {
+    width: 20rem;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    overflow-y: auto;
+    padding: 1.5rem 0;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 7px 7px 15px rgba(163, 177, 198, 0.5),
+        -7px -7px 20px rgba(255, 255, 255, 0.7),
+        inset 0px 0px 4px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toast {
+    width: 90%;
+    /* Ajustado para adaptarse mejor al contenedor */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: #333;
+    padding: 15px;
+    border-radius: 15px;
+    /* Mejora el aspecto redondeado */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.toast:hover {
+    transform: translateY(-5px);
+    /* Añade un efecto de elevación al pasar el ratón */
+    box-shadow: 7px 7px 20px rgba(163, 177, 198, 0.7),
+        -7px -7px 25px rgba(255, 255, 255, 0.9),
+        inset 0px 0px 6px rgba(255, 255, 255, 0.3);
+}
+
+.btn-espera {
+    width: 80%;
+    margin-top: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-espera:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo del scrollbar */
+.toasts::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 8px;
+}
+
+.toasts::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.toasts::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.toasts::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Estilo del scrollbar */
+
+.display.HistorialDeVisitas::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 8px;
+}
+
+
+.display.HistorialDeVisitas::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+.display.HistorialDeVisitas::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+
+.display.HistorialDeVisitas::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.display.PacientesInfo .paciente-informacion {
+    width: 20rem;
+    font-size: 1.2rem;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.informacion-section-antecedentes {
+    margin-top: 1rem;
+}
+
+.display.HistorialDeVisitas {
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.display.HistorialDeVisitas ul li {
+    padding: 0.5rem;
+}
+
+.display.FinalizarTurno {
+    display: flex;
+    flex-direction: column;
+    max-width: 20rem;
+}
+
+.display.FinalizarTurno textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin: 10px 0;
+    /* Espacio entre el textarea y el siguiente elemento */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    color: #333;
+    background-color: #fff;
+    resize: none;
+}
+
+
+.btn.add.turno {
+    width: 100%;
+}

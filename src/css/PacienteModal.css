@@ -13,7 +13,11 @@
     position: relative;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
     color: #333;
+    max-height: 80vh; /* Asegúrate de que el modal no se extienda más allá del 80% del viewport height */
+    height: auto; /* Ajusta el tamaño del modal según el contenido */
+    overflow-y: auto; /* Agrega un scroll si el contenido sobrepasa el max-height */
 }
+
   
 /* Título del modal */
 .modal-titulo {
@@ -58,11 +62,26 @@
     margin-right: 5px;
 }
   
-/* Alineación de los radios a la derecha */
+/* Ajuste del estilo de las etiquetas para alinear el texto a la izquierda y los botones de radio a la derecha */
+.paciente-formulario .antecedentes {
+    display: flex;
+    justify-content: space-between; /* Esto separa el texto de la etiqueta a la izquierda y el grupo de radios a la derecha */
+    align-items: center; /* Asegura que tanto el texto de la etiqueta como los botones de radio estén verticalmente centrados */
+    width: 100%; /* Asegura que el label ocupe todo el ancho disponible */
+}
+
+/* Ajuste del estilo del grupo de radios para alinearlo completamente a la derecha */
 .paciente-formulario .radio-group {
     display: flex;
-    justify-content: flex-end;
-    gap: 15px;
+    justify-content: flex-end; /* Mantiene el grupo de radios alineado a la derecha */
+    gap: 15px; /* Mantiene la separación entre los radios */
+    margin-left: auto; /* Asegura que el grupo de radios se mueva al extremo derecho */
+}
+
+
+/* Opcional: para ajustar el espacio entre los radio buttons */
+.radio-group input[type="radio"] {
+    margin: 0 5px;
 }
   
 /* Botones personalizados */

@@ -1,0 +1,15 @@
+.especialistasContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100%;
+    background:
+        linear-gradient(rgba(165, 214, 237, 0.7), rgba(244, 235, 220, 0.7)),
+        url('https://res.cloudinary.com/dtxdv136u/image/upload/v1725992591/medical-physician-doctor-man_cnf6il.jpg');
+    background-size: cover;
+    background-blend-mode: multiply;
+    padding: 5rem 2rem;
+}

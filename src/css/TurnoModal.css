@@ -1,0 +1,134 @@
+ /* Estilo general del modal */
+ .ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+}
+  
+.ReactModal__Content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    color: #333;
+    max-height: 80vh; /* Asegúrate de que el modal no se extienda más allá del 80% del viewport height */
+    height: auto; /* Ajusta el tamaño del modal según el contenido */
+    overflow-y: auto; /* Agrega un scroll si el contenido sobrepasa el max-height */
+}
+
+  
+/* Título del modal */
+.modal-titulo {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #007bff;
+}
+  
+/* Estilo del formulario */
+.turno-formulario {
+    display: flex;
+    flex-direction: column;
+}
+  
+/* Etiquetas y campos de entrada */
+.turno-formulario label {
+    font-weight: 500;
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+    color: #333;
+    display: block;
+}
+
+.turno-formulario .nombrePaciente{
+    font-size: 24px;
+    font-weight: 600;
+}
+  
+.turno-formulario input[type="text"],
+.turno-formulario input[type="datetime-local"],
+.turno-formulario textarea,
+.turno-formulario select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    color: #333;
+}
+  
+/* Botones personalizados */
+.turno-btn-principal {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+  
+.turno-btn-principal:hover {
+    background-color: #0056b3;
+}
+  
+.turno-btn-secundario {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #ccc;
+    color: black;
+    transition: background-color 0.3s ease;
+}
+  
+.turno-btn-secundario:hover {
+    background-color: #aaa;
+}
+
+.turno-boton-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    align-items: center; /* Alinea verticalmente en el centro */
+    gap: 5px;
+}
+
+.turno-boton-container button {
+    flex: 1; /* Los botones ocuparán el mismo espacio */
+    margin: 0; /* Espacio entre los botones */
+}
+
+.turno-btn-principal {
+    margin-right: auto; /* Alinea este botón a la izquierda */
+}
+
+.turno-btn-secundario:nth-child(2) {
+    margin: 0 auto; /* Alinea este botón al centro */
+}
+
+.turno-btn-secundario:last-child {
+    margin-left: auto; /* Alinea este botón a la derecha */
+}
+
+/* Estilo para los párrafos en el resumen del turno */
+.turno-resumen h3{
+    padding-bottom: 2rem;
+}
+.turno-resumen p {
+    margin-top: 1rem; /* Ajusta este valor según tus necesidades */
+}
+
+/* Puedes añadir una clase para los párrafos del resumen del turno */
+.turno-resumen p:first-of-type {
+    margin-top: 0; /* Para evitar margen en el primer párrafo si lo prefieres */
+}

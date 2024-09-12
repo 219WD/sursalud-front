@@ -5,9 +5,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1rem; 
-    background: transparent;
+    padding: 2rem 1rem; 
+    background: none; 
+    background-color: transparent; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 1; 
 }
+
 
 .logo img{
     width: 2.5rem;
@@ -21,7 +27,7 @@
     height: 2rem;
     font-size: 1.2rem;
     color: #fff;
-    background: #8125d7;
+    background: #AF5286;
     padding: 0.5rem 1rem;
     border-radius: 50px;
     cursor: pointer; 

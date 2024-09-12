@@ -1,0 +1,34 @@
+.preloader-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff; /* Ajusta el fondo si es necesario */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Asegúrate de que esté sobre otros elementos */
+}
+
+.preloader-container svg {
+  width: 300px; /* Ajusta el tamaño según lo que necesites */
+  height: auto;
+  stroke: #AF5286; /* Color del contorno */
+  stroke-width: 10px; /* Grosor del contorno */
+  fill: transparent; /* Relleno inicial transparente */
+  animation: relleno 2s infinite; /* Ajusta la duración de la animación según necesites */
+}
+
+@keyframes relleno {
+  0% {
+    fill: transparent; /* Empieza con relleno transparente */
+    stroke-dasharray: 1000; /* Ajusta según la longitud total del trazo */
+    stroke-dashoffset: 1000; /* Ajusta según la longitud total del trazo */
+  }
+  100% {
+    fill: #AF5286; /* Color final del relleno */
+    stroke-dasharray: 1000; /* Mantén el valor según la longitud total del trazo */
+    stroke-dashoffset: 0; /* Trazo relleno completamente */
+  }
+}

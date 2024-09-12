@@ -1,0 +1,13 @@
+/* ToastIcons.css */
+.fa-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.black-icon path {
+    fill: #000; /* Color para los íconos con clase black-icon */
+}
+
+.white-icon path {
+    fill: #000000; /* Color para los íconos con clase white-icon */
+}

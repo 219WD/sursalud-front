@@ -1,6 +1,16 @@
 .registerContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     width: 100vw;
     height: 100vh;
+    background:
+        linear-gradient(rgba(244, 235, 220, 0.7), rgba(244, 235, 220, 0.7)),
+        url('https://res.cloudinary.com/dtxdv136u/image/upload/v1725887666/5591317_t9r4dv.jpg');
+    background-size: cover;
+    background-blend-mode: multiply;
+    padding: 2rem;
 }
 .register{
     margin-top: 20vh;
@@ -10,9 +20,14 @@
     flex-direction: column;
     gap: 0.5rem;
     width: 30vw;
-    background-color: #2b38a7;
+    background: rgba(116, 116, 116, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 7px 7px 15px rgba(163, 177, 198, 0.5), 
+                -7px -7px 20px rgba(255, 255, 255, 0.7),
+                inset 0px 0px 4px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1rem;
-    border-radius: 5px;
     margin: auto;
 }
 .register form h2 {
@@ -29,7 +44,7 @@
 }
 
 .register form button{
-    color: #2b38a7;
+    color: #AF5286;
     font-size: 1rem;
     font-weight: bold;
     margin-top: 1rem;
@@ -40,8 +55,23 @@
 }
 
 .register form button:hover{
-    background-color: #2b38a7;
+    background-color: #AF5286;
     color: #fff;
     border: solid 1px #fff;
     transition: all 0.3s ease-in-out;
+}
+
+
+
+.register form p {
+    text-align: center;
+}
+
+.register form p .btnLink {
+    background: none;
+    color: #fff;
+}
+.register form p .btnLink:hover {
+    border: none;
+    text-decoration: underline;
 }
