@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { EditIcon, TrashIcon, PlusIcon, UserClockIcon } from '../Hooks/IconsFa';
+import { EditIcon, TrashIcon, PlusIcon } from '../Hooks/IconsFa';
 import '../css/PacienteList.css';
-import PacienteModal from './PacienteModal';
-import TurnoModal from './TurnoModal';
+import PacienteModal from '../components/PacienteModal';
+import TurnoModal from '../components/TurnoModal';
 import { useAuth } from '../context/AuthContext';
-import PacienteComponent from './PacienteOnlyRead';
-import { handleDelete } from '../utils/requests/patch/Patch';
+import PacienteComponent from '../components/PacienteOnlyRead';
 import useNotify from '../Hooks/Toasts';
-import { findAllPaciente } from '../utils/requests/get/A';
+import { findAllPaciente, handleDeletePaciente } from '../utils/requests/get/A';
 
 const PacienteTable = () => {
   const notify = useNotify();
@@ -16,6 +15,7 @@ const PacienteTable = () => {
   const { token: jwt } = useAuth();
   const [showInactive, setShowInactive] = useState(false);
   const [modalState, setModalState] = useState({ type: null, isOpen: false, selectedPaciente: null });
+  const [showAllPacientes, setShowAllPacientes] = useState(false);
 
   useEffect(() => {
     loadPacientes();
@@ -33,9 +33,9 @@ const PacienteTable = () => {
     }
   }, [jwt, notify]);
 
-  const handleDeletePaciente = async (id) => {
+  const handleDelete = async (id) => {
     try {
-      await handleDelete(id, jwt);
+      await handleDeletePaciente(id, jwt);
       notify('Paciente eliminado con éxito');
       loadPacientes();
     } catch (error) {
@@ -52,13 +52,13 @@ const PacienteTable = () => {
       paciente.dni.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
+  const pacientesToDisplay = showAllPacientes ? filteredPacientes : filteredPacientes.slice(0, 10);
+
   const handleModalToggle = (type = null, paciente = null) => {
     setModalState({ type, isOpen: !!type, selectedPaciente: paciente });
   };
 
   const handleSave = async (updatedPaciente) => {
-    // Lógica de guardado para el paciente
-    console.log('Paciente guardado:', updatedPaciente);
     await loadPacientes();
     handleModalToggle();
   };
@@ -68,6 +68,9 @@ const PacienteTable = () => {
     handleModalToggle(type, paciente);
   };
 
+  const toggleShowAllPacientes = () => {
+    setShowAllPacientes(prevState => !prevState);
+  };
 
   return (
     <div className="pacientesContainer">
@@ -96,8 +99,8 @@ const PacienteTable = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredPacientes.length > 0 ? (
-              filteredPacientes.slice(0, 10).map((paciente) => (
+            {pacientesToDisplay.length > 0 ? (
+              pacientesToDisplay.map((paciente) => (
                 <tr key={paciente._id} className="trFlex">
                   <td>{paciente.nombre}</td>
                   <td>{paciente.dni}</td>
@@ -110,7 +113,7 @@ const PacienteTable = () => {
                     </button>
                     <button
                       className="btn delete"
-                      onClick={() => handleDeletePaciente(paciente._id)}
+                      onClick={() => handleDelete(paciente._id)}
                     >
                       <TrashIcon />
                     </button>
@@ -137,10 +140,16 @@ const PacienteTable = () => {
           </tbody>
         </table>
         {filteredPacientes.length > 10 && (
-          <button onClick={() => setPacientes(pacientes)}>Ver más</button>
+          <button 
+          className='btn'
+          onClick={toggleShowAllPacientes}
+          >
+            {showAllPacientes ? 'Ver menos' : 'Ver más'}
+          </button>
         )}
       </div>
-      {/* Paciente Create */}
+
+      {/* Modals */}
       {modalState.type === 'paciente' && (
         <PacienteModal
           isOpen={modalState.isOpen}
@@ -150,7 +159,7 @@ const PacienteTable = () => {
           jwt={jwt}
         />
       )}
-      {/* Paciente Edit */}
+
       {modalState.type === 'edit' && (
         <PacienteModal
           isOpen={modalState.isOpen}
@@ -161,7 +170,6 @@ const PacienteTable = () => {
         />
       )}
 
-      {/* Turno Modal */}
       {modalState.type === 'turno' && (
         <TurnoModal
           isOpen={modalState.isOpen}
@@ -173,7 +181,6 @@ const PacienteTable = () => {
         />
       )}
 
-      {/* Read-Only Modal */}
       {modalState.type === 'view' && (
         <PacienteComponent
           isOpen={modalState.isOpen}

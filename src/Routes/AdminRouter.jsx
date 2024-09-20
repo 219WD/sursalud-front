@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import Preloading from '../components/Preloading';
 
 const AdminScreenLazy = lazy(() => import('../Admin/AdminScreen'))
-const PacientesLazy = lazy(() => import('../components/PacienteList'))
-const EspecialistasLazy = lazy(() => import('../components/MedicosList'))
-const TurnosLazy = lazy(() => import('../components/TurnoTable'))
-const AnalyticsLazy = lazy(() => import('../components/Analytics'))
-const SalaDeEsperaLazy = lazy(() => import('../components/SalaDeEspera'))
+const PacientesLazy = lazy(() => import('../pages/PacienteList'))
+const EspecialistasLazy = lazy(() => import('../pages/MedicosList'))
+const TurnosLazy = lazy(() => import('../pages/TurnoTable'))
+const AnalyticsLazy = lazy(() => import('../pages/Analytics'))
+const SalaDeEsperaLazy = lazy(() => import('../pages/SalaDeEspera'))
 
 
 function AdminRouter({ show, jwt }) {

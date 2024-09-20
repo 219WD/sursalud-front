@@ -9,7 +9,7 @@ export const emptyPaciente = {
     sexo: "",
   };
   
-  export const emptyAntecedentes = {
+  export const defaultAntecedentes = {
     afeccionCardiaca: false,
     alteracionCoagulacion: false,
     diabetes: false,
@@ -21,6 +21,6 @@ export const emptyPaciente = {
     alergia: false,
     asma: false,
     otros: false,
-  };
+};
   
   

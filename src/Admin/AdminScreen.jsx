@@ -1,106 +1,102 @@
 // AdminScreen.jsx
 import React, { useState, useEffect } from 'react';
 import '../css/AdminScreen.css';
+import { 
+  findAllPaciente, 
+  findAllEspecialista, 
+  findAllTurnos, 
+  deletePacienteDef, 
+  deleteEspecialistaDef, 
+  deleteTurnoDef 
+} from '../utils/requests/get/A';
+import useNotify from '../Hooks/Toasts';
 
 const AdminScreen = ({ jwt }) => {
   const [data, setData] = useState([]); // Para almacenar la lista actual (pacientes, especialistas, turnos)
   const [tableType, setTableType] = useState(''); // Controla qué tabla se muestra
+  const notify = useNotify(); // Hook para notificaciones
 
   useEffect(() => {
     // Cuando se cambia el tipo de tabla, hace la petición correspondiente
-    if (tableType === 'pacientes') fetchPacientes();
-    else if (tableType === 'especialistas') fetchEspecialistas();
-    else if (tableType === 'turnos') fetchTurnos();
+    if (tableType === 'pacientes') loadPacientes();
+    else if (tableType === 'especialistas') loadEspecialistas();
+    else if (tableType === 'turnos') loadTurnos();
   }, [tableType]);
 
-  // Fetch de pacientes
-  const fetchPacientes = async () => {
+  // Carga de pacientes
+  const loadPacientes = async () => {
     try {
-      const myHeaders = new Headers();
-      myHeaders.append('Authorization', 'Bearer ' + jwt);
-
-      const requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow',
-      };
-
-      const response = await fetch('http://localhost:3000/pacientes/findAllPaciente', requestOptions);
-      if (response.status >= 400) throw new Error('Error al obtener los pacientes');
-
-      const result = await response.json();
-      setData(result.data || result);
+      const result = await findAllPaciente(jwt);
+      setData(result);
     } catch (error) {
       console.error('Error al obtener los pacientes:', error);
+      notify('Error al obtener los pacientes', 'error');
     }
   };
 
-  // Fetch de especialistas
-  const fetchEspecialistas = async () => {
+  // Carga de especialistas
+  const loadEspecialistas = async () => {
     try {
-      const myHeaders = new Headers();
-      myHeaders.append('Authorization', 'Bearer ' + jwt);
-
-      const requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow',
-      };
-
-      const response = await fetch('http://localhost:3000/especialista/getEspecialistas', requestOptions);
-      if (response.status >= 400) throw new Error('Error al obtener los especialistas');
-
-      const result = await response.json();
-      setData(result.data || result);
+      const result = await findAllEspecialista(jwt);
+      setData(result);
     } catch (error) {
       console.error('Error al obtener los especialistas:', error);
+      notify('Error al obtener los especialistas', 'error');
     }
   };
 
-  // Fetch de turnos
-  const fetchTurnos = async () => {
+  // Carga de turnos
+  const loadTurnos = async () => {
     try {
-      const myHeaders = new Headers();
-      myHeaders.append('Authorization', 'Bearer ' + jwt);
-
-      const requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow',
-      };
-
-      const response = await fetch('http://localhost:3000/turnos/findAllTurnos', requestOptions);
-      if (response.status >= 400) throw new Error('Error al obtener los turnos');
-
-      const result = await response.json();
-      setData(result.data || result);
+      const result = await findAllTurnos(jwt);
+      setData(result);
     } catch (error) {
       console.error('Error al obtener los turnos:', error);
+      notify('Error al obtener los turnos', 'error');
     }
   };
 
-    // Fetch DELETE turno
-    const fetchDeleteTurno = async (id) => {
-      try {
-        const myHeaders = new Headers();
-        myHeaders.append('Authorization', 'Bearer ' + jwt);
-  
-        const requestOptions = {
-          method: 'DELETE',
-          headers: myHeaders,
-          redirect: 'follow',
-        };
-  
-        const response = await fetch(`http://localhost:3000/turnos/deleteTurnoById/${id}`, requestOptions);
-        if (response.status >= 400) throw new Error('Error al eliminar el turno');
-  
-        const result = await response.json();
-        alert(result.message); // Mostrar mensaje de confirmación
-        fetchTurnos(); // Actualiza la lista de turnos después de eliminar
-      } catch (error) {
-        console.error('Error al eliminar el turno:', error);
-      }
-    };
+  // Eliminar paciente con confirmación
+  const handleDeletePaciente = async (id) => {
+    const confirmed = window.confirm('¿Está seguro que desea eliminar este paciente?');
+    if (!confirmed) return;
+
+    try {
+      const result = await deletePacienteDef(id, jwt);
+      notify('Paciente eliminado con éxito', 'success');
+      loadPacientes(); // Actualiza la lista de pacientes
+    } catch (error) {
+      notify('Error al eliminar el paciente', 'error');
+    }
+  };
+
+  // Eliminar especialista con confirmación
+  const handleDeleteEspecialista = async (id) => {
+    const confirmed = window.confirm('¿Está seguro que desea eliminar este especialista?');
+    if (!confirmed) return;
+
+    try {
+      const result = await deleteEspecialistaDef(id, jwt);
+      notify('Especialista eliminado con éxito', 'success');
+      loadEspecialistas(); // Actualiza la lista de especialistas
+    } catch (error) {
+      notify('Error al eliminar el especialista', 'error');
+    }
+  };
+
+  // Eliminar turno con confirmación
+  const handleDeleteTurno = async (id) => {
+    const confirmed = window.confirm('¿Está seguro que desea eliminar este turno?');
+    if (!confirmed) return;
+
+    try {
+      const result = await deleteTurnoDef(id, jwt);
+      notify('Turno eliminado con éxito', 'success');
+      loadTurnos(); // Actualiza la lista de turnos
+    } catch (error) {
+      notify('Error al eliminar el turno', 'error');
+    }
+  };
 
   return (
     <div className="adminScreenContainer">
@@ -159,7 +155,7 @@ const AdminScreen = ({ jwt }) => {
                       <td>{item.nombre}</td>
                       <td>{item.edad}</td>
                       <td>
-                        <button className="btn delete">Eliminar</button>
+                        <button className="btn delete" onClick={() => handleDeletePaciente(item._id)}>Eliminar</button>
                       </td>
                     </>
                   )}
@@ -168,7 +164,7 @@ const AdminScreen = ({ jwt }) => {
                       <td>{item.nombre}</td>
                       <td>{item.especialidad}</td>
                       <td>
-                        <button className="btn delete">Eliminar</button>
+                        <button className="btn delete" onClick={() => handleDeleteEspecialista(item._id)}>Eliminar</button>
                       </td>
                     </>
                   )}
@@ -178,7 +174,7 @@ const AdminScreen = ({ jwt }) => {
                       <td>{new Date(item.fecha).toLocaleDateString()}</td>
                       <td>{item.especialista?.nombre || 'Especialista no disponible'}</td>
                       <td>
-                        <button className="btn delete">Eliminar</button>
+                        <button className="btn delete" onClick={() => handleDeleteTurno(item._id)}>Eliminar</button>
                       </td>
                     </>
                   )}
@@ -187,7 +183,7 @@ const AdminScreen = ({ jwt }) => {
             </tbody>
           </table>
         ) : (
-          <p>No se encontraron datos para mostrar.</p>
+          <p>No se encontraron datos para mostrar. Seleccione qué desea eliminar.</p>
         )}
       </div>
     </div>

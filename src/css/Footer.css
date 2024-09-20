@@ -33,7 +33,7 @@
     transition: color 0.3s ease;
   }
   
-  .social-icons a:hover {
-    color: #AF5286; /* Cambiar el color al pasar el cursor */
+  .social-icons a .white-icon path:hover {
+    fill: #AF5286; /* Cambiar el color al pasar el cursor */
   }
   

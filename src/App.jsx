@@ -12,8 +12,7 @@ import ModeratorRouter from "./Routes/ModeratorRouter";
 import AccessDenied from './pages/AccessDenied';
 import { Toaster } from 'react-hot-toast';
 import Preloading from './components/Preloading';
-
-const FooterLazy = lazy(() => import('./components/Footer'))
+import Footer from './components/Footer'
 
 const App = () => {
   const [jwt, setJwt] = useState(localStorage.getItem('token') || "");
@@ -49,8 +48,6 @@ const App = () => {
     }
   }, [jwt]);
 
-
-
   const changeJwt = (value) => {
     if (value) {
       setJwt(value);
@@ -62,7 +59,6 @@ const App = () => {
       setIsAuthenticated(false);
     }
   };
-
 
   return (
     <Router>
@@ -87,11 +83,7 @@ const App = () => {
           element={<ModeratorRouter show={role === 'moderator'} />}
         />
       </Routes>
-      <Suspense fallback={
-        <div><Preloading /></div>
-      }>
-        <FooterLazy />
-      </Suspense>
+      <Footer />
     </Router>
   );
 };

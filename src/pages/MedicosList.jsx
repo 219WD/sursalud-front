@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { EditIcon, TrashIcon, PlusIcon } from '../Hooks/IconsFa';
-import '../css/MedicosList.css'; // Considera cambiar el nombre del archivo CSS si es específico de especialistas
-import EspecialistaModal from './EspecialistaModal.jsx'; // Asegúrate de adaptar o crear este componente
-import TurnoModal from './TurnoModal.jsx';
+import '../css/MedicosList.css'; 
+import EspecialistaModal from '../components/EspecialistaModal.jsx'; 
+import TurnoModal from '../components/TurnoModal.jsx';
 import { useAuth } from '../context/AuthContext';
 import useNotify from '../Hooks/Toasts';
-
+import {findAllEspecialista, handleDeleteEspecialista} from '../utils/requests/get/A.js'
 
 const MedicosList = () => {
     const notify = useNotify();
@@ -17,57 +17,32 @@ const MedicosList = () => {
     const [selectedEspecialista, setSelectedEspecialista] = useState(null);
 
     useEffect(() => {
-        getEspecialistas();
-    }, [showInactive]);
+        loadEspecialistas();
+      }, []);
 
-    const getEspecialistas = async () => {
-        const myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer " + jwt);
-
-        const requestOptions = {
-            method: "GET",
-            headers: myHeaders,
-            redirect: "follow"
-        };
-
+      const loadEspecialistas = useCallback(async () => {
         try {
-            const response = await fetch(`http://localhost:3000/especialista/getEspecialistas`, requestOptions);
-
-            if (response.status >= 400) return alert("No se pudieron obtener los especialistas");
-
-            const result = await response.json();
-            setEspecialistas(result);
-        } catch (error) {
-            console.error("Error al obtener los especialistas:", error);
-        }
-    };
-
-    const handleDelete = async (id) => {
-        const myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer " + jwt);
-
-        const requestOptions = {
-            method: "PATCH", // PATCH para desactivar
-            headers: myHeaders,
-            redirect: "follow"
-        };
-
-        try {
-            const response = await fetch(`http://localhost:3000/especialista/${id}/toggle-status`, requestOptions);
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Error: ${response.status} - ${errorText}`);
+            const data = await findAllEspecialista(jwt);
+            if (data) {
+                setEspecialistas(data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
             }
-
-            console.log("Especialista eliminado con éxito");
-            notify('Especialista eliminado con éxito');
-            getEspecialistas(); // Actualiza la lista de especialistas
         } catch (error) {
-            notify('Ocurrió un error al eliminar el especialista.', 'error');
-            console.error("Error al eliminar especialista:", error);
+            console.log("Error al cargar los especialistas:", error);
+            notify('Ocurrio un error al cargar los especialistas.', 'error');
         }
-    };
+    }, [jwt, notify]);
+    
+
+      const handleDelete = async (id) => {
+        try {
+          await handleDeleteEspecialista(id, jwt);
+          notify('Especialista eliminado con éxito');
+          loadEspecialistas();
+        } catch (error) {
+          console.error("Error al eliminar especialista:", error);
+          notify('Ocurrió un error al eliminar el especialista.', 'error');
+        }
+      };
 
     const toggleInactiveView = () => {
         setShowInactive(!showInactive);
@@ -93,7 +68,7 @@ const MedicosList = () => {
 
     const handleSaveEspecialista = async (updatedEspecialista) => {
         console.log('Especialista guardado:', updatedEspecialista);
-        await getEspecialistas(); // Actualiza la lista de especialistas
+        await loadEspecialistas(); // Actualiza la lista de especialistas
         closeModal();
     };
 
