@@ -75,3 +75,9 @@
     border: none;
     text-decoration: underline;
 }
+
+@media (max-width: 990px) {
+    .register form{
+        width: 80vw;
+    }
+}

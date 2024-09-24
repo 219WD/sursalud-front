@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Xmark } from '../Hooks/IconsFa';
 import Modal from 'react-modal';
+import '../css/TurnoComponent.css'
 
 const TurnoComponent = ({ isOpen, onClose, turnoId, jwt }) => {
     const [turno, setTurno] = useState(null);
@@ -41,28 +42,31 @@ const TurnoComponent = ({ isOpen, onClose, turnoId, jwt }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="modal-overlay">
-            <div className="modal-content">
-                <button className="close-btn" onClick={handleCloseModal}>
-                    <Xmark />
-                </button>
-                {turno && (
-                    <div className="turno-info">
-                        <h3>Detalles del Turno</h3>
-                        <p>
-                            <strong>Fecha y Hora:</strong> {new Date(turno.fecha).toLocaleString('es-ES', {
-                                dateStyle: 'short',
-                                timeStyle: 'short',
-                            })}
-                        </p>
-                        <p><strong>Paciente:</strong> {turno.paciente.nombre}</p>
-                        <p><strong>Doctor:</strong> {turno.especialista.nombre}</p>
-                        <p><strong>Descripción:</strong> {turno.descripcion}</p>
-                    </div>
-
-                )}
-            </div>
-        </div>
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={handleCloseModal}
+            contentLabel="Detalles del Turno"
+            overlayClassName="TurnoModal__Overlay"
+            className="turnoR-modal"
+        >
+            <button className="close-btn" onClick={handleCloseModal}>
+                <Xmark />
+            </button>
+            {turno && (
+                <div className="turno-info">
+                    <h3>Detalles del Turno</h3>
+                    <p>
+                        <strong>Fecha y Hora:</strong> {new Date(turno.fecha).toLocaleString('es-ES', {
+                            dateStyle: 'short',
+                            timeStyle: 'short',
+                        })}
+                    </p>
+                    <p><strong>Paciente:</strong> {turno.paciente.nombre}</p>
+                    <p><strong>Doctor:</strong> {turno.especialista.nombre}</p>
+                    <p><strong>Descripción:</strong> {turno.descripcion}</p>
+                </div>
+            )}
+        </Modal>
     );
 };
 

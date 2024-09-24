@@ -202,7 +202,7 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
 
 
     return (
-        <Modal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel="Turno Modal">
+        <Modal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel="Turno Modal" className="turno-modal">
             <h2 className="modal-titulo">{turno ? 'Editar Turno' : 'Agregar Turno'}</h2>
 
             {pagina === 1 && (

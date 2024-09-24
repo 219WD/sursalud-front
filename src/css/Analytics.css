@@ -11,10 +11,12 @@
     background-size: cover;
     background-blend-mode: multiply;
     padding: 2rem;
+    overflow-x: hidden;
 }
 
 .displayAnalytic{
-    width: 80vw;
+    width: 100%; /* Cambiar a 100% para evitar que sobrepase el contenedor */
+    max-width: 80vw; /* Limitar el ancho máximo */
     background: rgba(116, 116, 116, 0.2);
     backdrop-filter: blur(10px);
     border-radius: 15px;
@@ -61,4 +63,22 @@
     margin-top: 1.5rem;
     text-align: center;
     color: #333;
+}
+
+@media (max-width: 990px) {
+    .analyticsScreen {
+        height: 100%;
+        padding-bottom: 6rem;
+    }
+    .displayAnalytic{
+        margin-top: 2rem;
+        padding: 2rem 2rem;
+        max-width: 90vw
+    }
+    .charts-row{
+        flex-direction: column;
+    }
+    .chart-container{
+        width: 70vw;
+    }
 }

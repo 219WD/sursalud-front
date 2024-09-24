@@ -63,3 +63,32 @@
 .tablaRenderizable::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+.actions-container {
+    display: flex;
+    gap: 10px; 
+    align-items: center; 
+}
+
+@media (max-width: 990px) {
+    .adminScreenContainer{
+        padding-top: 4rem;
+    }
+    h1 {
+        font-size: 1.7rem;
+    }
+    .display p {
+        width: 70vw;
+        color: #000;
+    }
+    .btns-container-delete {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .btn {
+        white-space: nowrap;
+    }
+    .tablaRenderizable{
+        width: 88vw;
+    }
+}

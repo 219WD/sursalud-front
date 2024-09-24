@@ -1,13 +1,16 @@
 // AdminScreen.jsx
 import React, { useState, useEffect } from 'react';
 import '../css/AdminScreen.css';
-import { 
-  findAllPaciente, 
-  findAllEspecialista, 
-  findAllTurnos, 
-  deletePacienteDef, 
-  deleteEspecialistaDef, 
-  deleteTurnoDef 
+import {
+  findAllPaciente,
+  findAllEspecialista,
+  findAllTurnos,
+  deletePacienteDef,
+  deleteEspecialistaDef,
+  deleteTurnoDef,
+  findAllUsers,
+  upgradeUserRole,
+  deleteUserDef
 } from '../utils/requests/get/A';
 import useNotify from '../Hooks/Toasts';
 
@@ -21,6 +24,7 @@ const AdminScreen = ({ jwt }) => {
     if (tableType === 'pacientes') loadPacientes();
     else if (tableType === 'especialistas') loadEspecialistas();
     else if (tableType === 'turnos') loadTurnos();
+    else if (tableType === 'usuarios') loadUsuarios();
   }, [tableType]);
 
   // Carga de pacientes
@@ -53,6 +57,17 @@ const AdminScreen = ({ jwt }) => {
     } catch (error) {
       console.error('Error al obtener los turnos:', error);
       notify('Error al obtener los turnos', 'error');
+    }
+  };
+
+  // Carga de usuarios
+  const loadUsuarios = async () => {
+    try {
+      const result = await findAllUsers(jwt);
+      setData(result);
+    } catch (error) {
+      console.error('Error al obtener los usuarios:', error);
+      notify('Error al obtener los usuarios', 'error');
     }
   };
 
@@ -98,6 +113,37 @@ const AdminScreen = ({ jwt }) => {
     }
   };
 
+  // Eliminar usuario con confirmación
+  const handleDeleteUser = async (id) => {
+    const confirmed = window.confirm('¿Está seguro que desea eliminar este usuario?');
+    if (!confirmed) return;
+
+    try {
+      const result = await deleteUserDef(id, jwt);
+      notify('Usuario eliminado con éxito', 'success');
+      loadUsuarios(); // Actualiza la lista de usuarios
+    } catch (error) {
+      notify('Error al eliminar el usuario', 'error');
+    }
+  };
+
+  // Función para promover a moderador
+  const handlePromoteModerator = async (userId) => {
+    const confirmed = window.confirm('¿Está seguro que desea promover a este usuario a moderador?');
+    if (!confirmed) return;
+
+    try {
+      const result = await upgradeUserRole(userId, jwt);
+      if (result) {
+        notify('Usuario promovido a moderador con éxito', 'success');
+        loadUsuarios(); // Actualiza la lista de usuarios
+      }
+    } catch (error) {
+      notify('Error al promover al usuario', 'error');
+      console.error('Error al promover al usuario:', error);
+    }
+  };
+
   return (
     <div className="adminScreenContainer">
       <div className="display">
@@ -114,6 +160,9 @@ const AdminScreen = ({ jwt }) => {
           </button>
           <button className="btn delete" onClick={() => setTableType('turnos')}>
             Eliminar turno
+          </button>
+          <button className="btn promote" onClick={() => setTableType('usuarios')}>
+            Promover a Moderador
           </button>
         </div>
       </div>
@@ -142,6 +191,13 @@ const AdminScreen = ({ jwt }) => {
                     <th>Paciente</th>
                     <th>Fecha</th>
                     <th>Especialista</th>
+                    <th>Acciones</th>
+                  </>
+                )}
+                {tableType === 'usuarios' && (
+                  <>
+                    <th>Email</th>
+                    <th>Rol</th>
                     <th>Acciones</th>
                   </>
                 )}
@@ -175,6 +231,32 @@ const AdminScreen = ({ jwt }) => {
                       <td>{item.especialista?.nombre || 'Especialista no disponible'}</td>
                       <td>
                         <button className="btn delete" onClick={() => handleDeleteTurno(item._id)}>Eliminar</button>
+                      </td>
+                    </>
+                  )}
+                  {tableType === 'usuarios' && (
+                    <>
+                      <td>{item.email}</td>
+                      <td>{item.role}</td>
+                      <td>
+                        <div className="actions-container">
+                          {item.role !== 'admin' && item.role !== 'moderator' && (
+                            <button
+                              className="btn promote"
+                              onClick={() => handlePromoteModerator(item._id)}
+                            >
+                              Promover
+                            </button>
+                          )}
+                          {item.role !== 'admin' && (
+                            <button
+                              className="btn delete"
+                              onClick={() => handleDeleteUser(item._id)}
+                            >
+                              Eliminar
+                            </button>
+                          )}
+                        </div>
                       </td>
                     </>
                   )}

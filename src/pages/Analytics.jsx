@@ -79,7 +79,7 @@ const Analytics = () => {
             <div className="displayAnalytic">
                 <h1>Analytics</h1>
                 <div className="charts-row">
-                <div className="chart-container">
+                    <div className="chart-container">
                         <h2>Pacientes Registrados Mensualmente</h2>
                         <Bar data={pacienteChartData} options={{ maintainAspectRatio: false }} />
                     </div>

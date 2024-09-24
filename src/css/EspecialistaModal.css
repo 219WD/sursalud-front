@@ -1,21 +1,27 @@
  /* Estilo general del modal */
 .ReactModal__Overlay {
     background-color: rgba(0, 0, 0, 0.75) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
   
-.ReactModal__Content {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 600px;
-    width: 90%;
-    margin: auto;
+.especialistaCU-modal {
+    max-width: 500px; /* Ancho específico para este modal */
+    width: 80%; /* Ancho responsive */
+    height: auto;
+    margin: auto; /* Centrar el modal */
     position: relative;
+    padding: 20px;
+    border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
     color: #333;
-    max-height: 80vh; /* Asegúrate de que el modal no se extienda más allá del 80% del viewport height */
-    height: auto; /* Ajusta el tamaño del modal según el contenido */
-    overflow-y: auto; /* Agrega un scroll si el contenido sobrepasa el max-height */
 }
 
   

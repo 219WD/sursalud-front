@@ -53,7 +53,6 @@ const HomeScreen = () => {
   return (
     <div className='homeScreen'>
       <div className="display">
-        {/* <h1>Sur Salud</h1> */}
         <div className="cardStats">
           <div className="statCard">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor"

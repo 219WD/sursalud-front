@@ -457,9 +457,9 @@ const TurnoTable = ({ jwt }) => {
             {filteredTurnos.length > 0 ? (
               filteredTurnos.map((turno) => (
                 <tr key={turno._id}>
-                  <td>{turno.paciente?.nombre || 'Paciente no disponible'}</td>
-                  <td>{new Date(turno.fecha).toLocaleDateString()}</td>
-                  <td>{turno?.especialista?.nombre || 'Especialista no disponible'}</td>
+                  <td data-label="Nombre">{turno.paciente?.nombre || 'Paciente no disponible'}</td>
+                  <td data-label="Turno">{new Date(turno.fecha).toLocaleDateString()}</td>
+                  <td data-label="Esp.">{turno?.especialista?.nombre || 'Especialista no disponible'}</td>
                   <td className="btns">
                     <button className="btn edit" onClick={() => handleEditClick(turno)}>
                     <EditIcon />

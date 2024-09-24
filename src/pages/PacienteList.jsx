@@ -102,8 +102,8 @@ const PacienteTable = () => {
             {pacientesToDisplay.length > 0 ? (
               pacientesToDisplay.map((paciente) => (
                 <tr key={paciente._id} className="trFlex">
-                  <td>{paciente.nombre}</td>
-                  <td>{paciente.dni}</td>
+                  <td data-label="Nombre">{paciente.nombre}</td>
+                  <td data-label="DNI">{paciente.dni}</td>
                   <td className="btns">
                     <button
                       className="btn edit"

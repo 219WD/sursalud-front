@@ -107,8 +107,8 @@ const MedicosList = () => {
                         {displayedEspecialista.length > 0 ? (
                             displayedEspecialista.slice(0, 10).map((especialista) => (
                                 <tr key={especialista._id} className='trFlex'>
-                                    <td>{especialista.nombre}</td>
-                                    <td>{especialista.especialidad}</td>
+                                    <td data-label="Nombre">{especialista.nombre}</td>
+                                    <td data-label="Especialidad">{especialista.especialidad}</td>
                                     <td className='btns'>
                                         <button className='btn edit' onClick={() => handleEditEspecialista(especialista)}>
                                             <EditIcon />

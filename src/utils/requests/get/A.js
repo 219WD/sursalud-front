@@ -3,6 +3,7 @@ const PACIENTES = '/pacientes';
 const ANTECEDENTES = '/antecedentes';
 const ESPECIALISTAS = '/especialista';
 const TURNOS = '/turnos';
+const USERS = '/users';
 
 // Helper function to perform fetch requests
 const fetchRequest = async (url, jwt, options = {}) => {
@@ -168,3 +169,22 @@ export function sanitizeModel(obj) {
   delete obj["password"];
   return obj;
 }
+
+// GET ALL USERS
+export const findAllUsers = async (jwt) => {
+  return await fetchRequest(`${API_URL}${USERS}/findAllUsers`, jwt);
+};
+
+// PUT UPGRADE USER ROLE
+export const upgradeUserRole = async (userId, jwt) => {
+  return await fetchRequest(`${API_URL}${USERS}/upgradeRole/${userId}`, jwt, {
+    method: 'PUT',
+  });
+};
+
+// DELETE DEFINITIVO USUARIO
+export const deleteUserDef = async (id, jwt) => {
+  return await fetchRequest(`${API_URL}${USERS}/deleteUser/${id}`, jwt, {
+    method: 'DELETE'
+  }); 
+};

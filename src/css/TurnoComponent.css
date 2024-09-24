@@ -1,0 +1,55 @@
+.ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.turnoR-modal {
+    max-width: 500px; /* Ancho específico para este modal */
+    width: 80%; /* Ancho responsive */
+    height: auto;
+    margin: auto; /* Centrar el modal */
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    color: #333;
+}
+
+/* Botón de cierre */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+}
+
+.turno-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Sección de información individual */
+.info-section {
+    margin-bottom: 20px;
+}
+
+.turno-info h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #007bff;
+}

@@ -12,3 +12,9 @@
     background-blend-mode: multiply;
     padding: 5rem 2rem;
 }
+
+@media (max-width: 990px) {
+    .especialistasContainer .display table {
+        width: 80vw;
+    }
+}

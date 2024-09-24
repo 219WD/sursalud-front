@@ -10,5 +10,11 @@
         url('https://res.cloudinary.com/dtxdv136u/image/upload/v1725992592/woman-doctor-with-medical-mask_lhleux.jpg');
     background-size: cover;
     background-blend-mode: multiply;
-    padding: 5rem 2rem;
+    padding: 5rem 1rem;
+}
+
+@media (max-width: 990px) {
+    .turnosContainer .display table {
+        width: 90vw;
+    }
 }

@@ -47,7 +47,7 @@ const EspecialistaModal = ({ isOpen, onRequestClose, especialista, onSave, jwt }
       };
 
     return (
-        <Modal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel="Especialista Modal">
+        <Modal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel="Especialista Modal" className="especialistaCU-modal">
             <h2 className="modal-titulo">{especialista ? 'Editar Especialista' : 'Agregar Especialista'}</h2>
 
             {pagina === 1 && (

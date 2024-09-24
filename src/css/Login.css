@@ -73,3 +73,9 @@
     border: none;
     text-decoration: underline;
 }
+
+@media (max-width: 990px) {
+    .login form{
+        width: 80vw;
+    }
+}

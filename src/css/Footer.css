@@ -37,3 +37,8 @@
     fill: #AF5286; /* Cambiar el color al pasar el cursor */
   }
   
+  @media (max-width: 990px) {
+    .footer {
+      flex-direction: column;
+    }
+  }

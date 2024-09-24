@@ -126,3 +126,41 @@ td {
 .btn.edit:hover .black-icon path {
   fill: #fff200;
 }
+
+@media (max-width: 990px) {
+  thead{
+      display: none;
+  }
+  tr, td{
+      display: block;
+      width: 100%;
+  }
+  tr{
+      margin-bottom: 15px;
+  }
+  tr td{
+      text-align: right;
+      position: relative;
+  }
+  td:before{
+      content: attr(data-label);
+      position: absolute;
+      left: 1rem;
+      font-weight: bold;
+  }
+  .buttons-actions{
+      text-align: center;
+  }
+
+  .display{
+    width: 90vw;
+  }
+
+  .searchButtons {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  .btn {
+    width: 100%;
+  }
+}

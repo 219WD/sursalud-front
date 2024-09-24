@@ -13,6 +13,7 @@ import AccessDenied from './pages/AccessDenied';
 import { Toaster } from 'react-hot-toast';
 import Preloading from './components/Preloading';
 import Footer from './components/Footer'
+import NotFound from './components/NotFound';
 
 const App = () => {
   const [jwt, setJwt] = useState(localStorage.getItem('token') || "");
@@ -82,6 +83,9 @@ const App = () => {
           path="/moderator/*"
           element={<ModeratorRouter show={role === 'moderator'} />}
         />
+
+        {/* Si ninguna ruta coincide, mostrar la página 404 */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </Router>

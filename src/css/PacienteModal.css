@@ -1,10 +1,20 @@
 /* Estilo general del modal */
 .ReactModal__Overlay {
-    background-color: rgba(0, 0, 0, 0.75) !important;
+    background-color: rgba(0, 0, 0, 0.75); /* Fondo semitransparente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
   
+/* Estilo general del modal */
 .ReactModal__Content {
-    background: rgba(255, 255, 255, 0.1);
+    background: #fff;
     backdrop-filter: blur(10px);
     border-radius: 15px;
     box-shadow: 7px 7px 15px rgba(163, 177, 198, 0.5),
@@ -19,10 +29,30 @@
     position: relative;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
     color: #333;
-    max-height: 80vh; /* Asegúrate de que el modal no se extienda más allá del 80% del viewport height */
+    max-height: 80vh; /* Limita la altura máxima del modal */
     height: auto; /* Ajusta el tamaño del modal según el contenido */
     overflow-y: auto; /* Agrega un scroll si el contenido sobrepasa el max-height */
 }
+
+/* Estilo del scrollbar en el modal */
+.ReactModal__Content::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 8px;
+}
+
+.ReactModal__Content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.ReactModal__Content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.ReactModal__Content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 
   
 /* Título del modal */
@@ -131,3 +161,14 @@
     margin-top: 20px;
 }
 
+/* Estilo para inputs con error */
+.input-error {
+    border: 2px solid red;
+}
+
+/* Estilo para los mensajes de error */
+.error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
