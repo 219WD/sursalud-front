@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import '../css/Login.css';
-import { API_URL } from '../../Initials/ApiUrl'
+import { API_URL } from '../utils/Initials/ApiUrl'
 
 const Login = ({ changeJwt }) => {
   const [email, setEmail] = useState('');

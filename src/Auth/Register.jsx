@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Register.css';
 import { jwtDecode } from 'jwt-decode';
-import { API_URL } from '../../Initials/ApiUrl'
+import { API_URL } from '../utils/Initials/ApiUrl'
 
 const Register = () => {
   const [email, setEmail] = useState('');
