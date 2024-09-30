@@ -117,6 +117,12 @@ export const updateEspecialista = async (id, especialista, jwt) => {
   });
 };
 
+export const updateTurno = async (id, turno, jwt) => {
+  return await fetchRequest(`${API_URL}${TURNOS}/updateTurnoById/${id}`, jwt, {
+    method: 'PUT',
+    body: JSON.stringify(turno)
+  });
+};
 
 // PATCH (Toggles)
 export const handleDeletePaciente = async (id, jwt) => {
