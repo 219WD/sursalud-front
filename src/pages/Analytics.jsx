@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement, LineElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend } from 'chart.js';
 import '../css/Analytics.css'
+import { API_URL } from '../utils/Initials/ApiUrl';
 
 ChartJS.register(
     CategoryScale,
