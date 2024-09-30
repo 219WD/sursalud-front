@@ -22,7 +22,7 @@ const Analytics = () => {
         // Obtener los datos mensuales de pacientes
         const fetchMonthlyPacientesData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/pacientes/monthly');
+                const response = await fetch(`${API_URL}/pacientes/monthly`);
                 const data = await response.json();
                 setMonthlyPacientesData(data);
             } catch (error) {
@@ -33,7 +33,7 @@ const Analytics = () => {
         // Obtener los datos mensuales de turnos
         const fetchMonthlyTurnosData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/turnos/monthly');
+                const response = await fetch(`${API_URL}/turnos/monthly`);
                 const data = await response.json();
                 setMonthlyTurnosData(data);
             } catch (error) {

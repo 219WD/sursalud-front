@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Xmark } from '../Hooks/IconsFa';
 import Modal from 'react-modal';
 import '../css/TurnoComponent.css'
+import { API_URL } from '../utils/Initials/ApiUrl'
 
 const TurnoComponent = ({ isOpen, onClose, turnoId, jwt }) => {
     const [turno, setTurno] = useState(null);
@@ -20,7 +21,7 @@ const TurnoComponent = ({ isOpen, onClose, turnoId, jwt }) => {
             const myHeaders = new Headers();
             myHeaders.append("Authorization", "Bearer " + jwt);
 
-            const response = await fetch(`http://localhost:3000/turnos/findATurnoById/${id}`, {
+            const response = await fetch(`${API_URL}/turnos/findATurnoById/${id}`, {
                 method: "GET",
                 headers: myHeaders,
                 redirect: "follow",

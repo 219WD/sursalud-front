@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useNotify from '../Hooks/Toasts';
 import '../css/SalaDeEspera.css';
+import { API_URL } from '../utils/Initials/ApiUrl';
 
 
 const SalaDeEspera = ({ jwt }) => {
@@ -32,7 +33,7 @@ const SalaDeEspera = ({ jwt }) => {
                 redirect: "follow",
             };
 
-            const response = await fetch("http://localhost:3000/turnos/findAllTurnos", requestOptions);
+            const response = await fetch(`${API_URL}/turnos/findAllTurnos`, requestOptions);
 
             if (response.status >= 400) throw new Error("Error al obtener los turnos");
 
@@ -50,7 +51,7 @@ const SalaDeEspera = ({ jwt }) => {
             const myHeaders = new Headers();
             myHeaders.append("Authorization", "Bearer " + jwt);
 
-            const response = await fetch(`http://localhost:3000/pacientes/findPacienteById/${id}`, {
+            const response = await fetch(`${API_URL}/pacientes/findPacienteById/${id}`, {
                 method: "GET",
                 headers: myHeaders,
                 redirect: "follow",
@@ -84,7 +85,7 @@ const SalaDeEspera = ({ jwt }) => {
             const myHeaders = new Headers();
             myHeaders.append("Authorization", "Bearer " + jwt);
 
-            const response = await fetch(`http://localhost:3000/antecedentes/findAntecedenteById/${id}`, {
+            const response = await fetch(`${API_URL}/antecedentes/findAntecedenteById/${id}`, {
                 method: "GET",
                 headers: myHeaders,
                 redirect: "follow",
@@ -126,7 +127,7 @@ const SalaDeEspera = ({ jwt }) => {
         };
     
         try {
-            const response = await fetch(`http://localhost:3000/turnos/${id}/toggle-status`, requestOptions);
+            const response = await fetch(`${API_URL}/turnos/${id}/toggle-status`, requestOptions);
     
             if (!response.ok) {
                 const errorText = await response.text();
@@ -171,7 +172,7 @@ const SalaDeEspera = ({ jwt }) => {
                 redirect: "follow",
             };
     
-            const response = await fetch(`http://localhost:3000/turnos/updateTurnoById/${turnoSeleccionado._id}`, requestOptions);
+            const response = await fetch(`${API_URL}/turnos/updateTurnoById/${turnoSeleccionado._id}`, requestOptions);
     
             if (!response.ok) {
                 const errorText = await response.text();

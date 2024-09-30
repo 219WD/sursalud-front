@@ -237,6 +237,7 @@ import TurnoModal from '../components/TurnoModal';
 import TurnoComponent from '../components/TurnoComponent';
 import useNotify from '../Hooks/Toasts';
 import {findAllEspecialista, findAllPaciente, toggleTurnoStatus, handleSalaDeEspera} from '../utils/requests/get/A'
+import { API_URL } from '../utils/Initials/ApiUrl';
 
 const TurnoTable = ({ jwt }) => {
   const notify = useNotify();
@@ -283,8 +284,8 @@ const TurnoTable = ({ jwt }) => {
       };
 
       const url = query
-        ? `http://localhost:3000/turnos/search?query=${query}`
-        : "http://localhost:3000/turnos/findAllTurnos";
+        ? `${API_URL}/turnos/search?query=${query}`
+        : `${API_URL}/turnos/findAllTurnos`;
 
       const response = await fetch(url, requestOptions);
 
@@ -309,7 +310,7 @@ const TurnoTable = ({ jwt }) => {
         redirect: "follow",
       };
 
-      const response = await fetch("http://localhost:3000/especialista/getEspecialistas", requestOptions);
+      const response = await fetch(`${API_URL}/especialista/getEspecialistas`, requestOptions);
 
       if (response.status >= 400) throw new Error("Error al obtener los especialistas");
 
@@ -331,7 +332,7 @@ const TurnoTable = ({ jwt }) => {
         redirect: "follow",
       };
 
-      const response = await fetch("http://localhost:3000/pacientes/findAllPaciente", requestOptions);
+      const response = await fetch(`${API_URL}/pacientes/findAllPaciente`, requestOptions);
 
       if (response.status >= 400) throw new Error("Error al obtener los pacientes");
 
@@ -354,7 +355,7 @@ const TurnoTable = ({ jwt }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:3000/turnos/${id}/toggle-status-activo`, requestOptions);
+      const response = await fetch(`${API_URL}/turnos/${id}/toggle-status-activo`, requestOptions);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -382,7 +383,7 @@ const TurnoTable = ({ jwt }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:3000/turnos/${id}/toggle-status`, requestOptions);
+      const response = await fetch(`${API_URL}/turnos/${id}/toggle-status`, requestOptions);
 
       if (!response.ok) {
         const errorText = await response.text();

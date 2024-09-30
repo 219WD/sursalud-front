@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import '../css/TurnoModal.css';
 
 import useNotify from '../Hooks/Toasts';
+import { API_URL } from '../utils/Initials/ApiUrl';
 
 
 Modal.setAppElement('#root');
@@ -66,7 +67,7 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
                 redirect: "follow",
             };
 
-            const response = await fetch(`http://localhost:3000/pacientes/findPacienteById/${pacienteId}`, requestOptions);
+            const response = await fetch(`${API_URL}/pacientes/findPacienteById/${pacienteId}`, requestOptions);
 
             if (response.status >= 400) return alert("No se pudo obtener el paciente");
 
@@ -102,7 +103,7 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
                 redirect: "follow",
             };
 
-            const response = await fetch("http://localhost:3000/turnos/createTurno", requestOptions);
+            const response = await fetch(`${API_URL}/turnos/createTurno`, requestOptions);
 
             if (!response.ok) {
                 const errorText = await response.text();
@@ -133,7 +134,7 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
                 redirect: "follow",
             };
 
-            const response = await fetch(`http://localhost:3000/especialista/getEspecialistas`, requestOptions);
+            const response = await fetch(`${API_URL}/especialista/getEspecialistas`, requestOptions);
 
             if (response.status >= 400) return alert("No se pudieron obtener los especialistas");
 
@@ -167,7 +168,7 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
                 redirect: "follow",
             };
 
-            const responseTurno = await fetch(`http://localhost:3000/turnos/updateTurnoById/${id}`, requestOptionsTurno);
+            const responseTurno = await fetch(`${API_URL}/turnos/updateTurnoById/${id}`, requestOptionsTurno);
             const result = await responseTurno.json();
             notify('Turno editado con éxito');
             console.log(result);
