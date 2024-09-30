@@ -29,7 +29,7 @@ const PacienteTable = () => {
       }
     } catch (error) {
       console.error("Error al cargar los pacientes:", error);
-      notify('Ocurrió un error al cargar los pacientes.', 'error');
+      notify('Ocurrió un error al cargar los pacientes. Actualizar página.', 'error');
     }
   }, [jwt, notify]);
 
