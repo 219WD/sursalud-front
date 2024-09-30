@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/HomeScreen.css';
+import { API_URL } from '../../Initials/ApiUrl'
 
 
 
@@ -15,7 +16,7 @@ const HomeScreen = () => {
     // Función para obtener la cantidad de pacientes
     const fetchPatientCount = async () => {
       try {
-        const response = await fetch('http://localhost:3000/pacientes/count');
+        const response = await fetch(`${API_URL}/pacientes/count`);
         const data = await response.json();
         setPatientCount(data.count);
       } catch (error) {
@@ -26,7 +27,7 @@ const HomeScreen = () => {
     // Función para obtener la cantidad de turnos de hoy
     const fetchTurnosHoy = async () => {
       try {
-        const response = await fetch('http://localhost:3000/turnos/today');
+        const response = await fetch(`${API_URL}/turnos/today`);
         const data = await response.json();
         setTurnosHoy(data.turnosHoy);
       } catch (error) {
@@ -37,7 +38,7 @@ const HomeScreen = () => {
     // Función para obtener la cantidad de medicos de hoy
     const fetchMedicos = async () => {
       try {
-        const response = await fetch('http://localhost:3000/especialista/count');
+        const response = await fetch(`${API_URL}/especialista/count`);
         const data = await response.json();
         setMedicosCount(data.count);
       } catch (error) {

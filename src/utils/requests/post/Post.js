@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000"; // Puedes ajustar esto según tu configuración
+import { API_URL } from '../../Initials/ApiUrl'
 
 const createAntecedente = async (antecedentes, jwt) => {
   try {

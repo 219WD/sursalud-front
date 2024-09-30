@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Register.css';
 import { jwtDecode } from 'jwt-decode';
+import { API_URL } from '../../Initials/ApiUrl'
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -27,7 +28,7 @@ const Register = () => {
       redirect: 'follow'
     };
 
-    fetch("http://localhost:3000/signup", requestOptions)
+    fetch(`${API_URL}/signup`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result);
