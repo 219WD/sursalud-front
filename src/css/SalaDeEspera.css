@@ -155,6 +155,9 @@
     resize: none;
 }
 
+.display.FinalizarTurno input{
+    margin: 10px 0;
+}
 
 .btn.add.turno {
     width: 100%;

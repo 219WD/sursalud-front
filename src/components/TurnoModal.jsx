@@ -15,6 +15,7 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
     const [descripcion, setDescripcion] = useState('');
     const [especialistaId, setEspecialistaId] = useState('');
     const [especialistas, setEspecialistas] = useState([]);
+    const [precio, setPrecio] = useState('');
     const [pagina, setPagina] = useState(1);
 
     useEffect(() => {
@@ -24,6 +25,7 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
             setFechaTurno('');
             setDescripcion('');
             setEspecialistaId('');
+            setPrecio('');
         }
     }, [isOpen]);
 
@@ -31,12 +33,13 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
         if (turno) {
             setTurnoActivo(turno.turno);
             setPaciente(turno.paciente || null);
-            setFechaTurno(turno.fecha ? new Date(turno.fecha).toISOString().slice(0, 16) : ''); 
+            setFechaTurno(turno.fecha ? new Date(turno.fecha).toISOString().slice(0, 16) : '');
             setDescripcion(turno.descripcion);
-            setEspecialistaId(turno.especialista ? turno.especialista._id : ''); 
+            setEspecialistaId(turno.especialista ? turno.especialista._id : '');
+            setPrecio(turno.precio);
         }
     }, [turno]);
-    
+
 
     useEffect(() => {
         if (isOpen) {
@@ -89,6 +92,7 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
                 fecha: fechaTurno,
                 descripcion,
                 especialista: especialistaId,
+                precio,
             });
 
             const requestOptions = {
@@ -153,6 +157,7 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
                 fecha: fechaTurno,
                 descripcion,
                 especialista: especialistaId,
+                precio,
             });
 
             const requestOptionsTurno = {
@@ -172,18 +177,18 @@ const TurnoModal = ({ isOpen, onRequestClose, turno, onSave, jwt, pacienteId }) 
         }
     };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (turno && turno._id) {
-      console.log("Actualizando turno con ID:", turno._id);
-      await updateTurnoById(turno._id);
-    } else {
-      console.log("Creando nuevo turno");
-      await createTurno();
-    }
-    onSave();
-    onRequestClose();
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (turno && turno._id) {
+            console.log("Actualizando turno con ID:", turno._id);
+            await updateTurnoById(turno._id);
+        } else {
+            console.log("Creando nuevo turno");
+            await createTurno();
+        }
+        onSave();
+        onRequestClose();
+    };
 
     const formatFechaHora = (fechaHora) => {
         if (!fechaHora) return '';

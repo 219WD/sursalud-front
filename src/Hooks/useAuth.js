@@ -1,8 +1,7 @@
-// hooks/useAuth.js
 import { useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode'; // Cambia a una importación con nombre
+import { jwtDecode } from 'jwt-decode'; 
 
-const useAuth = () => {
+export const useAuth = () => {
   const [jwt, setJwt] = useState(localStorage.getItem('token') || "");
   const [role, setRole] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(!!jwt);
@@ -45,5 +44,3 @@ const useAuth = () => {
 
   return { jwt, role, isAuthenticated, changeJwt };
 };
-
-export default useAuth;

@@ -11,6 +11,7 @@ const SalaDeEspera = ({ jwt }) => {
     const [turnosPaciente, setTurnosPaciente] = useState([]);
     const [descripcion, setDescripcion] = useState('');
     const [turnoSeleccionado, setTurnoSeleccionado] = useState(null);
+    const [precio, setPrecio] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -160,6 +161,7 @@ const SalaDeEspera = ({ jwt }) => {
                 descripcion,
                 turno: false, // Asegúrate de que esto esté incluido
                 paciente: turnoSeleccionado.paciente._id,
+                precio,
             });
     
             const requestOptions = {
@@ -228,6 +230,7 @@ const SalaDeEspera = ({ jwt }) => {
                             <p><strong>Fecha de Nacimiento:</strong> {formatDateForInput(paciente.fechaNacimiento)}</p>
                             <p><strong>Edad:</strong> {paciente.edad}</p>
                             <p><strong>Sexo:</strong> {paciente.sexo}</p>
+                            <p><strong>Medicamentos:</strong> {paciente.medicamentos}</p>
                         </div>
                         <div className="informacion-section-antecedentes">
                             <h3>Antecedentes</h3>
@@ -275,6 +278,15 @@ const SalaDeEspera = ({ jwt }) => {
                             rows="4"
                             placeholder="Ingrese la descripción del turno"
                         />
+                    <label>
+                        Precio:
+                        <input
+                            type="text"
+                            value={precio}
+                            onChange={(e) => setPrecio(e.target.value)}
+                            required
+                        />
+                    </label>
                         <button onClick={handleCerrarTurno} className="btn add turno">
                             Cerrar Turno
                         </button>

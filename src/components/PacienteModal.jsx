@@ -22,6 +22,7 @@ const PacienteModal = ({ isOpen, onRequestClose, paciente, onSave, jwt }) => {
     const [fechaNacimiento, setFechaNacimiento] = useState('');
     const [edad, setEdad] = useState('');
     const [sexo, setSexo] = useState('');
+    const [medicamentos, setMedicamentos] = useState('');
     const [errors, setErrors] = useState({});
 
     const [pagina, setPagina] = useState(1);
@@ -71,6 +72,7 @@ const PacienteModal = ({ isOpen, onRequestClose, paciente, onSave, jwt }) => {
                 asma: false,
                 otros: false,
             });
+            setMedicamentos('');
             setErrors({});
             setPagina(1);
         }
@@ -88,6 +90,7 @@ const PacienteModal = ({ isOpen, onRequestClose, paciente, onSave, jwt }) => {
             findAntecedenteById(paciente.antecedentes, jwt)
                 .then((data) => setAntecedentes(sanitizeModel(data)))
                 .catch((error) => console.error('Error al obtener antecedentes:', error));
+            setMedicamentos(paciente.medicamentos);
         }
     }, [paciente, jwt]);
 
@@ -101,7 +104,7 @@ const PacienteModal = ({ isOpen, onRequestClose, paciente, onSave, jwt }) => {
 
     const handleNext = (e) => {
         e.preventDefault();
-        const formValues = { nombre, dni, domicilio, telefono, fechaNacimiento, edad, sexo };
+        const formValues = { nombre, dni, domicilio, telefono, fechaNacimiento, edad, sexo, medicamentos };
         const newErrors = validateForm(formValues);
         setErrors(newErrors);
         if (Object.keys(newErrors).length === 0) {
@@ -111,7 +114,7 @@ const PacienteModal = ({ isOpen, onRequestClose, paciente, onSave, jwt }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formValues = { nombre, dni, domicilio, telefono, fechaNacimiento, edad, sexo };
+        const formValues = { nombre, dni, domicilio, telefono, fechaNacimiento, edad, sexo, medicamentos };
         const newErrors = validateForm(formValues);
         setErrors(newErrors);
         if (Object.keys(newErrors).length > 0) {
@@ -121,11 +124,11 @@ const PacienteModal = ({ isOpen, onRequestClose, paciente, onSave, jwt }) => {
 
         try {
             if (paciente && paciente._id) {
-                await updatePaciente(paciente._id, { nombre, dni, domicilio, telefono, fechaNacimiento, edad, sexo, antecedentes: paciente.antecedentes }, jwt);
+                await updatePaciente(paciente._id, { nombre, dni, domicilio, telefono, fechaNacimiento, edad, sexo, antecedentes: paciente.antecedentes, medicamentos }, jwt);
                 await updateAntecedente(paciente.antecedentes, antecedentes, jwt);
             } else {
                 const antecedentesId = await createAntecedente(antecedentes, jwt);
-                await createPaciente({ nombre, dni, domicilio, telefono, fechaNacimiento, edad, sexo, antecedentes: antecedentesId }, jwt);
+                await createPaciente({ nombre, dni, domicilio, telefono, fechaNacimiento, edad, sexo, antecedentes: antecedentesId, medicamentos }, jwt);
             }
             notify('Paciente guardado con éxito');
             onSave();
@@ -227,6 +230,17 @@ const PacienteModal = ({ isOpen, onRequestClose, paciente, onSave, jwt }) => {
                             <option value="F">Femenino</option>
                         </select>
                         {errors.sexo && <span className="error-text">{errors.sexo}</span>}
+                    </label>
+                    <label>
+                        Medicamentos:
+                        <input
+                            type="text"
+                            value={medicamentos}
+                            onChange={(e) => setMedicamentos(e.target.value)}
+                            className={errors.medicamentos ? 'input-error' : ''}
+                            required
+                        />
+                        {errors.medicamentos && <span className="error-text">{errors.medicamentos}</span>}
                     </label>
                     <div className="paciente-boton-container">
                         <button type="submit" className="paciente-btn-principal">Siguiente</button>

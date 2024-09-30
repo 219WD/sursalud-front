@@ -75,6 +75,9 @@ const PacienteComponent = ({ isOpen, onClose, pacienteId, jwt }) => {
               <p>
                 <strong>Sexo:</strong> {paciente.sexo}
               </p>
+              <p>
+                <strong>Medicamentos:</strong> {paciente.medicamentos}
+              </p>
             </div>
             <div className="info-section">
               <h3>Antecedentes</h3>

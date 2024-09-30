@@ -1,4 +1,4 @@
-export const validateForm = ({ nombre, dni, domicilio, telefono, fechaNacimiento, edad, sexo }) => {
+export const validateForm = ({ nombre, dni, domicilio, telefono, fechaNacimiento, edad, sexo, medicamentos }) => {
     const newErrors = {};
     
     // Validar nombre (requerido)
@@ -31,6 +31,9 @@ export const validateForm = ({ nombre, dni, domicilio, telefono, fechaNacimiento
     if (!sexo) {
         newErrors.sexo = 'El sexo es obligatorio';
     }
-
+    // Validar medicamentos (requerido)
+    if (!medicamentos.trim()) {
+        newErrors.medicamentos = 'Si el paciente no toma medicacion indicarlo';
+    }
     return newErrors; // Retorna los errores
 };

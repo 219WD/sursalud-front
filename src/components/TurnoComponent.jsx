@@ -64,6 +64,7 @@ const TurnoComponent = ({ isOpen, onClose, turnoId, jwt }) => {
                     <p><strong>Paciente:</strong> {turno.paciente.nombre}</p>
                     <p><strong>Doctor:</strong> {turno.especialista.nombre}</p>
                     <p><strong>Descripción:</strong> {turno.descripcion}</p>
+                    <p><strong>Precio:</strong> {turno.precio}</p>
                 </div>
             )}
         </Modal>
