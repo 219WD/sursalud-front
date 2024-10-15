@@ -46,6 +46,10 @@ export const findAllPaciente = async (jwt) => {
   return await fetchRequest(`${API_URL}${PACIENTES}/findAllPaciente`, jwt);
 };
 
+export const getProfile = async (jwt) => {
+  return await fetchRequest(`${API_URL}/profile`, jwt);
+};
+
 export const findAllAntecedentes = async (jwt) => {
   return await fetchRequest(`${API_URL}${ANTECEDENTES}/findAllAntecedentes`, jwt);
 };

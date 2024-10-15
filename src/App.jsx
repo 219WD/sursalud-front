@@ -15,13 +15,15 @@ import { useAuth } from './Hooks/useAuth';
 const App = () => {
   const { jwt, role, changeJwt } = useAuth();
   const isAdmin = role === 'admin';
+  const isModerator = role === 'moderator';
+  const isAdminOrModerator = isAdmin || isModerator;  // Permitir acceso a ambos
 
   return (
     <Router>
       <Toaster position="top-right" reverseOrder={false} />
-      <NavBar authenticated={!!jwt} isAdmin={isAdmin} changeJwt={changeJwt} />
+      <NavBar authenticated={!!jwt} isAdmin={isAdminOrModerator} changeJwt={changeJwt} />
       <Routes>
-        <Route path="/" element={<HomeScreen />} />
+        <Route path="/" element={<HomeScreen isAdmin={isAdmin} />} />
         <Route path="/login" element={<Login changeJwt={changeJwt} />} />
         <Route path="/register" element={<Register />} />
 
@@ -32,11 +34,11 @@ const App = () => {
         />
         <Route
           path="/admin/*"
-          element={<AdminRouter show={isAdmin} jwt={jwt} />}
+          element={<AdminRouter show={isAdminOrModerator} jwt={jwt} />}  // Acceso para ambos
         />
         <Route
           path="/moderator/*"
-          element={<ModeratorRouter show={role === 'moderator'} />}
+          element={<ModeratorRouter show={isModerator} jwt={jwt} />}
         />
 
         {/* Si ninguna ruta coincide, mostrar la página 404 */}

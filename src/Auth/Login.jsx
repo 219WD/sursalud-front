@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import '../css/Login.css';
 import { API_URL } from '../utils/Initials/ApiUrl'
+import useNotify from '../Hooks/Toasts';
 
 const Login = ({ changeJwt }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const notify = useNotify();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ const Login = ({ changeJwt }) => {
           changeJwt(result.token);
           const decodedToken = jwtDecode(result.token);
           const userRole = decodedToken.user.role;
+          console.log("Token decodificado después del login:", decodedToken);  // Verifica la estructura del token
 
           if (userRole === 'admin') {
             navigate('/admin');
@@ -35,8 +38,10 @@ const Login = ({ changeJwt }) => {
           } else {
             navigate('/');
           }
+          notify(`Bienvenido ${decodedToken.user.email}`);
         } else {
           console.error('Login failed:', result.message);
+          notify('Error al iniciar sesion.', 'error');
         }
       })
       .catch(error => console.error('Error al conectar con el servidor:', error));

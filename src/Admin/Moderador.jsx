@@ -1,12 +1,14 @@
-import React from 'react'
-import '../css/ModeradorScreen.css'
+import React from 'react';
+import '../css/ModeradorScreen.css';
 
 const ModeradorScreen = () => {
+  console.log("ModeradorScreen renderizado");
+
   return (
-    <div className='moderadorScreen'>
+    <div className="moderatorScreenContainer">
       <h1>Hola Moderador</h1>
     </div>
   )
 }
 
-export default ModeradorScreen
+export default ModeradorScreen;

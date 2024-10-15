@@ -1,9 +1,11 @@
-.moderadorScreen {
+.moderatorScreenContainer {
     display: flex;
     width: 100vw;
     height: 100vh;
+    border: 2px solid red;  /* Borde temporal para depuración */
 }
 
-.moderadorScreen h1 {
+.moderatorScreenContainer h1 {
     margin: auto;
+    color: blue;  /* Cambia el color del texto para hacerlo más visible */
 }

@@ -18,6 +18,7 @@ const PacienteTable = () => {
   const [showAllPacientes, setShowAllPacientes] = useState(false);
 
   useEffect(() => {
+    console.log(jwt)
     loadPacientes();
   }, []);
 
