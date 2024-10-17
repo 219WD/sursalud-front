@@ -32,7 +32,7 @@ const Login = ({ changeJwt }) => {
           if (userRole === 'admin') {
             navigate('/admin');
           } else if (userRole === 'moderator') {
-            navigate('/moderator');
+            navigate('/');
           } else if (userRole === 'user') {
             navigate('/user');
           } else {
