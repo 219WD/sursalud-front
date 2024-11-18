@@ -16,9 +16,11 @@ const PacienteTable = () => {
   const [showInactive, setShowInactive] = useState(false);
   const [modalState, setModalState] = useState({ type: null, isOpen: false, selectedPaciente: null });
   const [showAllPacientes, setShowAllPacientes] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const loadPacientes = useCallback(async () => {
     try {
+      setIsLoading(true);
       if (!jwt) throw new Error("JWT no proporcionado");
       const data = await findAllPaciente(jwt);
       if (data) {
@@ -27,6 +29,8 @@ const PacienteTable = () => {
     } catch (error) {
       console.error("Error al cargar los pacientes:", error);
       notify('Ocurrió un error al cargar los pacientes. Actualizar página.', 'error');
+    } finally {
+      setIsLoading(false);
     }
   }, [jwt, notify]);
 
