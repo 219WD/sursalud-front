@@ -17,13 +17,9 @@ const PacienteTable = () => {
   const [modalState, setModalState] = useState({ type: null, isOpen: false, selectedPaciente: null });
   const [showAllPacientes, setShowAllPacientes] = useState(false);
 
-  useEffect(() => {
-    console.log(jwt)
-    loadPacientes();
-  }, []);
-
   const loadPacientes = useCallback(async () => {
     try {
+      if (!jwt) throw new Error("JWT no proporcionado");
       const data = await findAllPaciente(jwt);
       if (data) {
         setPacientes(data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
@@ -33,6 +29,12 @@ const PacienteTable = () => {
       notify('Ocurrió un error al cargar los pacientes. Actualizar página.', 'error');
     }
   }, [jwt, notify]);
+
+  useEffect(() => {
+    if (jwt) {
+      loadPacientes();
+    }
+  }, [jwt, loadPacientes]);
 
   const handleDelete = async (id) => {
     try {
