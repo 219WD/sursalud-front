@@ -38,7 +38,7 @@ const PacienteTable = () => {
     if (jwt) {
       loadPacientes();
     }
-  }, [jwt, loadPacientes]);
+  }, [jwt]);
 
   const handleDelete = async (id) => {
     try {
