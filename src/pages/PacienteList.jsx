@@ -1,20 +1,23 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { EditIcon, TrashIcon, PlusIcon } from '../Hooks/IconsFa';
-import '../css/PacienteList.css';
-import PacienteModal from '../components/PacienteModal';
-import TurnoModal from '../components/TurnoModal';
-import { useAuth } from '../context/AuthContext';
-import PacienteComponent from '../components/PacienteOnlyRead';
-import useNotify from '../Hooks/Toasts';
-import { findAllPaciente, handleDeletePaciente } from '../utils/requests/get/A';
+import React, { useState, useEffect, useCallback } from "react";
+import { EditIcon, TrashIcon, PlusIcon } from "../Hooks/IconsFa";
+import "../css/PacienteList.css";
+import PacienteModal from "../components/PacienteModal";
+import TurnoModal from "../components/TurnoModal";
+import { useAuth } from "../context/AuthContext";
+import PacienteComponent from "../components/PacienteOnlyRead";
+import useNotify from "../Hooks/Toasts";
+import { findAllPaciente, handleDeletePaciente } from "../utils/requests/get/A";
 
-const PacienteTable = () => {
+const PacienteTable = ({ jwt }) => {
   const notify = useNotify();
   const [pacientes, setPacientes] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const { token: jwt } = useAuth();
   const [showInactive, setShowInactive] = useState(false);
-  const [modalState, setModalState] = useState({ type: null, isOpen: false, selectedPaciente: null });
+  const [modalState, setModalState] = useState({
+    type: null,
+    isOpen: false,
+    selectedPaciente: null,
+  });
   const [showAllPacientes, setShowAllPacientes] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,42 +27,51 @@ const PacienteTable = () => {
       if (!jwt) throw new Error("JWT no proporcionado");
       const data = await findAllPaciente(jwt);
       if (data) {
-        setPacientes(data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        setPacientes(
+          data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        );
       }
     } catch (error) {
       console.error("Error al cargar los pacientes:", error);
-      notify('Ocurrió un error al cargar los pacientes. Actualizar página.', 'error');
+      notify(
+        "Ocurrió un error al cargar los pacientes. Actualizar página.",
+        "error"
+      );
     } finally {
       setIsLoading(false);
     }
   }, [jwt, notify]);
 
   useEffect(() => {
+    console.log(jwt);
     if (jwt) {
       loadPacientes();
     }
-  }, [jwt]);
+  }, [jwt, useAuth]);
 
   const handleDelete = async (id) => {
     try {
       await handleDeletePaciente(id, jwt);
-      notify('Paciente eliminado con éxito');
+      notify("Paciente eliminado con éxito");
       loadPacientes();
     } catch (error) {
       console.error("Error al eliminar paciente:", error);
-      notify('Ocurrió un error al eliminar el paciente.', 'error');
+      notify("Ocurrió un error al eliminar el paciente.", "error");
     }
   };
 
   const toggleInactiveView = () => setShowInactive((prev) => !prev);
 
-  const filteredPacientes = pacientes.filter((paciente) =>
-    (showInactive ? !paciente.activo : paciente.activo) &&
-    (paciente.nombre.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      paciente.dni.toLowerCase().includes(searchQuery.toLowerCase()))
+  const filteredPacientes = pacientes.filter(
+    (paciente) =>
+      (showInactive ? !paciente.activo : paciente.activo) &&
+      (paciente.nombre.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        paciente.dni.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
-  const pacientesToDisplay = showAllPacientes ? filteredPacientes : filteredPacientes.slice(0, 10);
+  const pacientesToDisplay = showAllPacientes
+    ? filteredPacientes
+    : filteredPacientes.slice(0, 10);
 
   const handleModalToggle = (type = null, paciente = null) => {
     setModalState({ type, isOpen: !!type, selectedPaciente: paciente });
@@ -76,7 +88,7 @@ const PacienteTable = () => {
   };
 
   const toggleShowAllPacientes = () => {
-    setShowAllPacientes(prevState => !prevState);
+    setShowAllPacientes((prevState) => !prevState);
   };
 
   return (
@@ -90,11 +102,14 @@ const PacienteTable = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button className="btn add" onClick={() => handleModalToggle('paciente')}>
+          <button
+            className="btn add"
+            onClick={() => handleModalToggle("paciente")}
+          >
             <PlusIcon /> Agregar Paciente
           </button>
           <button className="btn inactive" onClick={toggleInactiveView}>
-            {showInactive ? 'Mostrar Activos' : 'Mostrar Inactivos'}
+            {showInactive ? "Mostrar Activos" : "Mostrar Inactivos"}
           </button>
         </div>
         <table>
@@ -114,7 +129,7 @@ const PacienteTable = () => {
                   <td className="btns">
                     <button
                       className="btn edit"
-                      onClick={() => handleActionClick('edit', paciente._id)}
+                      onClick={() => handleActionClick("edit", paciente._id)}
                     >
                       <EditIcon />
                     </button>
@@ -126,13 +141,13 @@ const PacienteTable = () => {
                     </button>
                     <button
                       className="btn ver"
-                      onClick={() => handleActionClick('view', paciente._id)}
+                      onClick={() => handleActionClick("view", paciente._id)}
                     >
                       Ver
                     </button>
                     <button
                       className="btn add"
-                      onClick={() => handleActionClick('turno', paciente._id)}
+                      onClick={() => handleActionClick("turno", paciente._id)}
                     >
                       <PlusIcon /> Turno
                     </button>
@@ -147,17 +162,14 @@ const PacienteTable = () => {
           </tbody>
         </table>
         {filteredPacientes.length > 10 && (
-          <button 
-          className='btn'
-          onClick={toggleShowAllPacientes}
-          >
-            {showAllPacientes ? 'Ver menos' : 'Ver más'}
+          <button className="btn" onClick={toggleShowAllPacientes}>
+            {showAllPacientes ? "Ver menos" : "Ver más"}
           </button>
         )}
       </div>
 
       {/* Modals */}
-      {modalState.type === 'paciente' && (
+      {modalState.type === "paciente" && (
         <PacienteModal
           isOpen={modalState.isOpen}
           onRequestClose={() => handleModalToggle()}
@@ -167,7 +179,7 @@ const PacienteTable = () => {
         />
       )}
 
-      {modalState.type === 'edit' && (
+      {modalState.type === "edit" && (
         <PacienteModal
           isOpen={modalState.isOpen}
           onRequestClose={() => handleModalToggle()}
@@ -177,7 +189,7 @@ const PacienteTable = () => {
         />
       )}
 
-      {modalState.type === 'turno' && (
+      {modalState.type === "turno" && (
         <TurnoModal
           isOpen={modalState.isOpen}
           onRequestClose={() => handleModalToggle()}
@@ -188,7 +200,7 @@ const PacienteTable = () => {
         />
       )}
 
-      {modalState.type === 'view' && (
+      {modalState.type === "view" && (
         <PacienteComponent
           isOpen={modalState.isOpen}
           onClose={() => handleModalToggle()}
