@@ -36,13 +36,6 @@ const TurnoComponent = ({ isOpen, onClose, turnoId, jwt }) => {
         }
     };
 
-    // Función para sumar 3 horas
-    const sumarTresHoras = (fechaOriginal) => {
-        const fecha = new Date(fechaOriginal);
-        fecha.setHours(fecha.getHours() + 3); // Sumar 3 horas
-        return fecha;
-    };
-
     const handleCloseModal = () => {
         onClose();
     };
@@ -65,7 +58,7 @@ const TurnoComponent = ({ isOpen, onClose, turnoId, jwt }) => {
                     <h3>Detalles del Turno</h3>
                     <p>
                         <strong>Fecha y Hora:</strong>
-                        {turno.fecha && sumarTresHoras(turno.fecha).toLocaleString('es-ES', {
+                        {turno.fecha && new Date(turno.fecha).toLocaleString('es-ES', {
                             timeZone: 'America/Argentina/Buenos_Aires', // Zona horaria correcta
                             dateStyle: 'short',
                             timeStyle: 'short',
